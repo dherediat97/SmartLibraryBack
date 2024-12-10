@@ -5,7 +5,6 @@ var router = express.Router();
 /* GET book */
 router.get('/:isbn', async function (req, res, next) {
   try {
-    console.log(req.params.isbn);
     const book = await fetchBook(req.params.isbn);
     res.json(book);
   } catch (error) {

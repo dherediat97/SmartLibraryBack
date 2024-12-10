@@ -5,7 +5,8 @@ const config = require('../config');
 async function fetchBooks(page = 1) {
   const offset = helper.getOffset(page, config.pageSize);
   const results = await query(
-    `SELECT * FROM books LIMIT ${offset},${config.pageSize}`
+    `SELECT id,isbn,title,date_published,author_name,publisher_name, num_pages, img_url
+     FROM books ORDER BY date_published ASC LIMIT ${offset},${config.pageSize}`
   );
   const books = helper.emptyOrRows(results);
   const info = { page, pageSize: config.pageSize };

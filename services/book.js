@@ -3,10 +3,9 @@ const helper = require('../utils/helper');
 
 async function fetchBook(isbn) {
   const results = await query(
-    `SELECT id,isbn,title,author_name,publisher_name,num_pages FROM books WHERE isbn=${isbn}`
+    `SELECT id, isbn, title, author_name, publisher_name, num_pages, img_url FROM books WHERE isbn=${isbn}`
   );
-  const book = helper.emptyOrRows(results);
-  return book;
+  if (results.length > 0) return results[0];
 }
 
 async function insertBook(params) {}
