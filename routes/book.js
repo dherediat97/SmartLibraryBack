@@ -8,7 +8,7 @@ router.get('/:isbn', async function (req, res, next) {
     const book = await fetchBook(req.params.isbn);
     res.json(book);
   } catch (error) {
-    console.error('Ocurrió un error al traer todos los libros. Error: ', error);
+    console.error('Ocurrió un error al traer el libros. Error: ', error);
     next(error);
   }
 });
