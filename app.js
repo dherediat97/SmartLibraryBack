@@ -15,10 +15,12 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: process.env.WEBSITE_URL,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 const secretKey = process.env.SECRET_KEY;
+
+const port = process.env.PORT || 8080;
 
 function verifyToken(req, res, next) {
   const header = req.header('Authorization') || '';
@@ -60,8 +62,6 @@ app.post('/login', (req, res) => {
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
-
-const port = 8080 | process.env.PORT;
 
 app.use(logger('dev'));
 app.use(cors(corsOptions));
