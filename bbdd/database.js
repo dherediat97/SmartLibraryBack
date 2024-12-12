@@ -3,7 +3,7 @@ const config = require('../config');
 const { Client } = require('pg');
 
 async function query(sqlQuery, params) {
-  if (config.db.isProd) {
+  if (config.isProd) {
     const client = new Client({
       connectionString: process.env.DATABASE_URL_UNPOOLED,
     });

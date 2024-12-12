@@ -5,7 +5,7 @@ const config = require('../config');
 async function fetchBooks(page = 1) {
   const offset = helper.getOffset(page, config.pageSize);
   var results;
-  if (!config.db.isProd) {
+  if (!config.isProd) {
     results = await query(
       `SELECT id,isbn,title,date_published,author_name,publisher_name, num_pages, img_url
      FROM books ORDER BY date_published ASC LIMIT ${offset},${config.pageSize}`
