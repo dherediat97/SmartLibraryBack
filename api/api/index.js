@@ -1,14 +1,15 @@
-var app = require('express')();
+const express = require('express');
+const app = express();
 var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
 const jwt = require('jsonwebtoken');
 
-var booksRouter = require('./routes/books');
-var bookRouter = require('./routes/book');
-var reviewsRouter = require('./routes/reviews');
-const { isProd } = require('./config');
+var booksRouter = require('../routes/books');
+var bookRouter = require('../routes/book');
+var reviewsRouter = require('../routes/reviews');
+const { isProd } = require('../config');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -71,6 +72,8 @@ app.use('/books', verifyToken, booksRouter);
 app.use('/book', verifyToken, bookRouter);
 app.use('/reviews', verifyToken, reviewsRouter);
 
-if (isProd === 'false') app.listen(port, () => {});
+app.listen(port, () => {
+  console.log(`Server listening in port ${port}`);
+});
 
 module.exports = app;
