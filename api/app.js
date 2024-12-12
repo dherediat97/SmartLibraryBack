@@ -1,6 +1,4 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
+var app = require('express')();
 var logger = require('morgan');
 var cors = require('cors');
 var bodyParser = require('body-parser');
@@ -11,9 +9,9 @@ var booksRouter = require('../routes/books');
 var bookRouter = require('../routes/book');
 var reviewsRouter = require('../routes/reviews');
 
-var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 var corsOptions = {
   origin: process.env.WEBSITE_URL,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -65,11 +63,8 @@ app.post('/login', (req, res) => {
 
 app.use(logger('dev'));
 app.use(cors(corsOptions));
-app.use(express.json());
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', verifyToken, (req, res) => {
+app.get('/', (req, res) => {
   res.json({ message: 'ok' });
 });
 

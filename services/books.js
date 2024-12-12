@@ -1,6 +1,6 @@
 const { query } = require('../bbdd/database');
 const helper = require('../utils/helper');
-const config = require('../config');
+const config = require('../api/config');
 
 async function fetchBooks(page = 1) {
   const offset = helper.getOffset(page, config.pageSize);

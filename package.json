@@ -2,7 +2,7 @@
   "name": "smartlibraryback",
   "version": "0.0.1",
   "private": true,
-  "main": "api/index.js",
+  "main": "api/app.js",
   "scripts": {
     "start": "node ./bin/www",
     "backend": "nodemon --env-file=.env ./api/app.js localhost 8080"
