@@ -74,7 +74,7 @@ ALTER TABLE `reviews`
 ADD CONSTRAINT `book_id_FK` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`);
 ```
 
-- Insertar los datos usando o sql, ambas tablas tienen el CRUD completo
+- Insertar los datos usando postman o sql, ambas tablas(books y reviews) tienen el CRUD completo
 
 ```sql
 INSERT INTO `books` (`id`, `isbn`, `title`, `author_name`, `publisher_name`, `num_pages`, `img_url`, `date_published`) VALUES
