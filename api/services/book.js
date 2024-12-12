@@ -6,11 +6,75 @@ async function fetchBook(isbn) {
   if (results.length > 0) return results[0];
 }
 
-async function insertBook(params) {}
+async function insertBook(body) {
+  try {
+    const {
+      isbn,
+      title,
+      date_published,
+      author_name,
+      publisher_name,
+      num_pages,
+      img_url,
+    } = body;
 
-async function updateBook(params) {}
+    const results = await query(
+      `INSERT INTO books(isbn,title,date_published,author_name,publisher_name, num_pages, img_url) VALUES (?,?,?,?,?,?,?)`,
+      [
+        isbn,
+        title,
+        date_published,
+        author_name,
+        publisher_name,
+        num_pages,
+        img_url,
+      ]
+    );
+    return results.insertId;
+  } catch (error) {
+    return undefined;
+  }
+}
 
-async function deleteBook(params) {}
+async function updateBook(body) {
+  try {
+    const {
+      isbn,
+      title,
+      date_published,
+      author_name,
+      publisher_name,
+      num_pages,
+      img_url,
+    } = body;
+
+    const results = await query(
+      `UPDATE books SET isbn=?,title=?,date_published=?,author_name=?,publisher_name=?, num_pages=?, img_url=? WHERE isbn=${isbn}`,
+      [
+        isbn,
+        title,
+        date_published,
+        author_name,
+        publisher_name,
+        num_pages,
+        img_url,
+      ]
+    );
+
+    return results.changedRows;
+  } catch (error) {
+    return 0;
+  }
+}
+
+async function deleteBook(bookId) {
+  try {
+    const results = await query(`DELETE FROM books WHERE id=${bookId}`);
+    return results.affectedRows;
+  } catch (error) {
+    return undefined;
+  }
+}
 
 module.exports = {
   fetchBook,
