@@ -13,7 +13,7 @@ async function fetchBooks(page = 1) {
   } else {
     results = await query(
       `SELECT id,isbn,title,date_published,author_name,publisher_name, num_pages, img_url
-       FROM books ORDER BY date_published ASC`
+     FROM books ORDER BY date_published ASC LIMIT ${offset} OFFSET ${config.pageSize}`
     );
   }
 
