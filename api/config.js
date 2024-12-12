@@ -6,8 +6,8 @@ const config = {
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
   },
-  isProd: process.env.IS_PROD,
   pageSize: 5,
 };
+const isProd = process.env.IS_PROD;
 
-module.exports = config;
+module.exports = { config, isProd };

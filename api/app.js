@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 var booksRouter = require('../routes/books');
 var bookRouter = require('../routes/book');
 var reviewsRouter = require('../routes/reviews');
+const { isProd } = require('./config');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -36,7 +37,6 @@ function verifyToken(req, res, next) {
 }
 
 app.post('/login', (req, res) => {
-  console.log(req.body);
   try {
     res.header('Access-Control-Allow-Origin', '*');
     const username = req.body.username;
@@ -72,6 +72,6 @@ app.use('/books', verifyToken, booksRouter);
 app.use('/book', verifyToken, bookRouter);
 app.use('/reviews', verifyToken, reviewsRouter);
 
-app.listen(port, () => {});
+if (isProd === 'false') app.listen(port, () => {});
 
 module.exports = app;

@@ -1,9 +1,9 @@
 const mysql = require('mysql2/promise');
-const config = require('../api/config');
 const { Client } = require('pg');
+const { config, isProd } = require('../api/config');
 
 async function query(sqlQuery, params) {
-  if (!config.isProd) {
+  if (isProd === 'true') {
     const client = new Client({
       connectionString: process.env.DATABASE_URL_UNPOOLED,
     });
