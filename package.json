@@ -5,7 +5,7 @@
   "main": "./api/index.js",
   "scripts": {
     "start": "node ./api/index.js",
-    "backend": "nodemon --env-file=.env ./api/index.js localhost 8080"
+    "backend": "nodemon --env-file=.env ./api/api/index.js localhost 8080"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
