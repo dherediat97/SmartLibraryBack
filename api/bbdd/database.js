@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 const { Client } = require('pg');
-const { config, isProd } = require('../api/config');
+const { config, isProd } = require('../config');
 
 async function query(sqlQuery, params) {
   if (isProd === 'true') {

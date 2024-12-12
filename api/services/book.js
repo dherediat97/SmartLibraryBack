@@ -1,6 +1,4 @@
 const { query } = require('../bbdd/database');
-const helper = require('../utils/helper');
-
 async function fetchBook(isbn) {
   const results = await query(
     `SELECT id, isbn, title, author_name, publisher_name, num_pages, img_url FROM books WHERE isbn=${isbn}`

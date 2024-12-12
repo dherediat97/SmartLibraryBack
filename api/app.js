@@ -5,9 +5,9 @@ var bodyParser = require('body-parser');
 
 const jwt = require('jsonwebtoken');
 
-var booksRouter = require('../routes/books');
-var bookRouter = require('../routes/book');
-var reviewsRouter = require('../routes/reviews');
+var booksRouter = require('./routes/books');
+var bookRouter = require('./routes/book');
+var reviewsRouter = require('./routes/reviews');
 const { isProd } = require('./config');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,7 +56,6 @@ app.post('/login', (req, res) => {
       return res.status(401).json({ message: 'Authentication failed' });
     }
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 });

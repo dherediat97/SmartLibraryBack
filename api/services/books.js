@@ -1,11 +1,11 @@
 const { query } = require('../bbdd/database');
+const { isProd, config } = require('../config');
 const helper = require('../utils/helper');
-const config = require('../api/config');
 
 async function fetchBooks(page = 1) {
   const offset = helper.getOffset(page, config.pageSize);
   var results;
-  if (!config.isProd) {
+  if (isProd === 'false') {
     results = await query(
       `SELECT id,isbn,title,date_published,author_name,publisher_name, num_pages, img_url
      FROM books ORDER BY date_published ASC LIMIT ${offset},${config.pageSize}`
