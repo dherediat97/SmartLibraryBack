@@ -9,8 +9,16 @@ async function fetchBooks(page = 1) {
      FROM books ORDER BY date_published ASC LIMIT ${config.pageSize} OFFSET ${offset}`
   );
 
+  const resultsCount = await query(`SELECT COUNT(*) as count from books`);
+  const count = resultsCount[0].count;
+
   const books = helper.emptyOrRows(results);
-  const info = { page, pageSize: config.pageSize };
+  const info = {
+    page,
+    totalResults: count,
+    totalPages: parseInt(count / config.pageSize + 1),
+    pageSize: config.pageSize,
+  };
 
   return {
     books,
